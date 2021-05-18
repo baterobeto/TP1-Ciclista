@@ -58,6 +58,7 @@ int main()
         }
 
         VECSUMCOL[i] = sumaColumnas;
+        sumaColumnas = 0;
 
         cout << endl;
     }

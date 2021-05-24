@@ -30,7 +30,7 @@ int main()
 
     for (int i = 0; i < valor; i++)
     {
-        for (int j = 0; j < count; j++)
+        for (int j = 0; j < valor; j++)
         {
             cin >> matriz[i][j] << endl;
             cout << " : " << endl;

@@ -8,7 +8,7 @@ struct Ciclista
 {
 
   int cantVueltasGeneral = 20;
-  int posicion = 0; //Posicion de ubucacion(Primera vuelta, segunda vuelta, etc.)
+  int posicion = 0; //Posicion de ubicacion(Primera vuelta, segunda vuelta, etc.)
   int duracion = 0; //(Expresada como un numero entero en formato MMSS)
   int kilometraje = 0;
   int tiempoVuelta[MAX_TIEMPO];
@@ -23,37 +23,37 @@ void leer(string mensaje, int &valor)
   cin >> valor;
 }
 
-void carga(int principio, int inicio, int &tiempoMax, int &tiempoMin, int &numeroVueltaMax, int &numeroVueltaMin, int &porcentaje)
+void carga(int principio, int inicio, int &tiempoMax, int &tiempoMin,
+           int &numeroVueltaMax, int &numeroVueltaMin, int &porcentaje, int &posicion)
 {
   Ciclista unCiclista;
 
   int cantVueltasCiclista = 0;
-  int i = 0;
 
   while (principio != 0 && inicio != 0)
   {
     cout << "Ingrese el numero de vuelta: ";
-    cin >> unCiclista.numeroVuelta[i];
+    cin >> unCiclista.numeroVuelta[posicion];
     cout << "Ingrese el tiempo de la vuelta: (MMSS)";
-    cin >> unCiclista.tiempoVuelta[i];
-    cout << "Ingrese la distancia realizada: ";
+    cin >> unCiclista.tiempoVuelta[posicion];
+    cout << "Ingrese la distancia realizada: (KM) ";
     cin >> unCiclista.distancia;
 
-    if (unCiclista.tiempoVuelta[i] < tiempoMax)
+    if (unCiclista.tiempoVuelta[posicion] < tiempoMax)
     {
-      tiempoMax = unCiclista.tiempoVuelta[i];
-      numeroVueltaMax = i + 1;
+      tiempoMax = unCiclista.tiempoVuelta[posicion];
+      numeroVueltaMax = posicion + 1;
     }
     else
     {
-      tiempoMin = unCiclista.tiempoVuelta[i];
-      numeroVueltaMin = i + 1;
+      tiempoMin = unCiclista.tiempoVuelta[posicion];
+      numeroVueltaMin = posicion + 1;
     }
 
     porcentaje = tiempoMin / tiempoMax - 1;
 
     cantVueltasCiclista++;
-    i++;
+    posicion++;
 
     cout << "Presione 1 Para continuar // 0 Para finalizar: " << endl;
     cin >> inicio;
@@ -72,6 +72,7 @@ int main()
 
   int tiempoVueltaMin = 0;
   int porcentajeReduccion = 0;
+  int posicion = 0;
 
   while (principio != 0)
   {
@@ -80,7 +81,7 @@ int main()
 
     leer(" / Se comenzara con la carga de los datos, presione 1 para CONTINUAR 0 para CANCELAR / ", inicio);
 
-    carga(principio, inicio, tiempoVueltaMax, tiempoVueltaMin, numeroVueltaMax, numeroVueltaMin, porcentajeReduccion);
+    carga(principio, inicio, tiempoVueltaMax, tiempoVueltaMin, numeroVueltaMax, numeroVueltaMin, porcentajeReduccion, posicion);
 
     leer("/**** Seguro que desea finalizar? Presione 0 ****/", principio);
   }

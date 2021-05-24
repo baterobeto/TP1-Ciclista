@@ -2,7 +2,7 @@
 using namespace std;
 
 #define MAX_VUELTAS 100
-#define MAX_TIEMPO 10000
+#define MAX_TIEMPO 100000
 
 struct Ciclista
 {
@@ -13,6 +13,7 @@ struct Ciclista
   int kilometraje = 0;
   int tiempoVuelta[MAX_TIEMPO];
   int numeroVuelta[MAX_VUELTAS];
+
   int distancia = 0;
 };
 
@@ -22,63 +23,71 @@ void leer(string mensaje, int &valor)
   cin >> valor;
 }
 
+void carga(int principio, int inicio, int &tiempoMax, int &tiempoMin, int &numeroVueltaMax, int &numeroVueltaMin, int &porcentaje)
+{
+  Ciclista unCiclista;
+
+  int cantVueltasCiclista = 0;
+  int i = 0;
+
+  while (principio != 0 && inicio != 0)
+  {
+    cout << "Ingrese el numero de vuelta: ";
+    cin >> unCiclista.numeroVuelta[i];
+    cout << "Ingrese el tiempo de la vuelta: (MMSS)";
+    cin >> unCiclista.tiempoVuelta[i];
+    cout << "Ingrese la distancia realizada: ";
+    cin >> unCiclista.distancia;
+
+    if (unCiclista.tiempoVuelta[i] < tiempoMax)
+    {
+      tiempoMax = unCiclista.tiempoVuelta[i];
+      numeroVueltaMax = i + 1;
+    }
+    else
+    {
+      tiempoMin = unCiclista.tiempoVuelta[i];
+      numeroVueltaMin = i + 1;
+    }
+
+    porcentaje = tiempoMin / tiempoMax - 1;
+
+    cantVueltasCiclista++;
+    i++;
+
+    cout << "Presione 1 Para continuar // 0 Para finalizar: " << endl;
+    cin >> inicio;
+  }
+}
+
 int main()
 {
 
   int principio = 1;
   int inicio = 1;
-  int cantVueltasCiclista = 0;
-  int tiempoVueltaMax = MAX_TIEMPO;
-  int tiempoVueltaMin = 0;
-  int i = 0;
   int numeroVueltaMax = 0;
   int numeroVueltaMin = 0;
-  int porcentajeReduccion = 0;
 
-  Ciclista unCiclista;
+  int tiempoVueltaMax = MAX_TIEMPO;
+
+  int tiempoVueltaMin = 0;
+  int porcentajeReduccion = 0;
 
   while (principio != 0)
   {
-    cout << " / Bienvenido / " << endl;
-    cout << " / Se comenzara con la carga de los datos, presione 1 para CONTINUAR 0 para CANCELAR /" << endl;
-    cin >> inicio;
 
-    while (principio != 0 && inicio != 0)
-    {
-      cout << "Ingrese el numero de vuelta: ";
-      cin >> unCiclista.numeroVuelta[i];
-      cout << "Ingrese el tiempo de la vuelta: ";
-      cin >> unCiclista.tiempoVuelta[i];
-      cout << "Ingrese la distancia realizada: ";
-      cin >> unCiclista.distancia;
+    cout << " /******* Bienvenido *******/ " << endl;
 
-      if (unCiclista.tiempoVuelta[i] < tiempoVueltaMax)
-      {
-        tiempoVueltaMax = unCiclista.tiempoVuelta[i];
-        numeroVueltaMax = i + 1;
-      }
-      else
-      {
-        tiempoVueltaMin = unCiclista.tiempoVuelta[i];
-        numeroVueltaMin = i + 1;
-      }
+    leer(" / Se comenzara con la carga de los datos, presione 1 para CONTINUAR 0 para CANCELAR / ", inicio);
 
-      porcentajeReduccion = tiempoVueltaMin / tiempoVueltaMax - 1;
+    carga(principio, inicio, tiempoVueltaMax, tiempoVueltaMin, numeroVueltaMax, numeroVueltaMin, porcentajeReduccion);
 
-      cantVueltasCiclista++;
-      i++;
-
-      cout << "Presione 1 Para continuar // 0 Para finalizar: " << endl;
-      cin >> inicio;
-    }
-
-    cout << "Seguro que desea finalizar? Presione 0" << endl;
-    cin >> principio;
+    leer("/**** Seguro que desea finalizar? Presione 0 ****/", principio);
   }
 
   cout << "La vuelta mas rapida fue " << numeroVueltaMax << " con el tiempo " << tiempoVueltaMax << endl;
   cout << "La vuelta mas lenta fue " << numeroVueltaMin << " con el tiempo " << tiempoVueltaMin << endl;
-  cout << "La porcentaje de reduccion de tiempo es " << porcentajeReduccion << endl;
+  cout << "La porcentaje de mejora en el mejor tiempo fue es de " << porcentajeReduccion << endl;
 
   return 0;
 }

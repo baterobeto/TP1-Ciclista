@@ -17,21 +17,18 @@ struct Ciclista
   int distancia = 0;
 };
 
-void leer(string mensaje, int &valor)
-{
+void leer(string mensaje, int& valor) {
   cout << mensaje << endl;
   cin >> valor;
 }
 
-void carga(int principio, int inicio, int &tiempoMax, int &tiempoMin,
-           int &numeroVueltaMax, int &numeroVueltaMin, int &porcentaje, int &posicion)
-{
+void carga(int principio, int inicio, int& tiempoMax, int& tiempoMin,
+  int& numeroVueltaMax, int& numeroVueltaMin, int& porcentaje, int& posicion) {
   Ciclista unCiclista;
 
   int cantVueltasCiclista = 0;
 
-  while (principio != 0 && inicio != 0)
-  {
+  while (principio != 0 && inicio != 0) {
     cout << "Ingrese el numero de vuelta: ";
     cin >> unCiclista.numeroVuelta[posicion];
     cout << "Ingrese el tiempo de la vuelta: (MMSS)";
@@ -39,13 +36,11 @@ void carga(int principio, int inicio, int &tiempoMax, int &tiempoMin,
     cout << "Ingrese la distancia realizada: (KM) ";
     cin >> unCiclista.distancia;
 
-    if (unCiclista.tiempoVuelta[posicion] < tiempoMax)
-    {
+    if (unCiclista.tiempoVuelta[posicion] < tiempoMax) {
       tiempoMax = unCiclista.tiempoVuelta[posicion];
       numeroVueltaMax = posicion + 1;
     }
-    else
-    {
+    else {
       tiempoMin = unCiclista.tiempoVuelta[posicion];
       numeroVueltaMin = posicion + 1;
     }
@@ -60,8 +55,7 @@ void carga(int principio, int inicio, int &tiempoMax, int &tiempoMin,
   }
 }
 
-int main()
-{
+int main() {
 
   int principio = 1;
   int inicio = 1;
@@ -74,8 +68,8 @@ int main()
   int porcentajeReduccion = 0;
   int posicion = 0;
 
-  while (principio != 0)
-  {
+
+  while (principio != 0) {
 
     cout << " /******* Bienvenido *******/ " << endl;
 

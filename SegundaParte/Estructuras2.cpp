@@ -1,14 +1,12 @@
 #include <iostream>
 using namespace std;
 
-void leer(string mensaje, string &valor)
-{
+void leer(string mensaje, string& valor) {
   cout << mensaje << endl;
   cin >> valor;
 }
 
-void leer(string mensaje, int &valor)
-{
+void leer(string mensaje, int& valor) {
   cout << mensaje << endl;
   cin >> valor;
 }
@@ -26,24 +24,20 @@ struct Persona
   Fecha fechaNacimiento;
 };
 
-void cargar(Persona &persona)
-{
+void cargar(Persona& persona) {
 }
 
-bool fechaValida(Fecha fecha)
-{
+bool fechaValida(Fecha fecha) {
   return fecha.mes >= 1 && fecha.mes < 13 && fecha.dia >= 1 && fecha.dia < 31 && fecha.anio > 0;
 }
 
-void cargar(Fecha &fecha)
-{
+void cargar(Fecha& fecha) {
   leer("Ingrese el dia: ", fecha.dia);
   leer("Ingrese el mes: ", fecha.mes);
   leer("Ingrese el anio: ", fecha.anio);
 }
 
-Persona cargarPersona()
-{
+Persona cargarPersona() {
   Persona unaPersona;
   leer("Ingrese el nombre: ", unaPersona.nombre);
   cargar(unaPersona.fechaNacimiento);
@@ -51,8 +45,7 @@ Persona cargarPersona()
   return unaPersona;
 }
 
-int main()
-{
+int main() {
   Persona unaPersona = cargarPersona();
 
   Persona otraPersona = cargarPersona();
